@@ -1,6 +1,8 @@
 # Background
 
-Wish to create a rust tool for IPMI over LAN. This will enable me to access server hardware through code.
+Create a rust tool for IPMI over LAN. This will enable me to access server hardware through code.
+
+This work is tracked under https://github.com/htemuri/rust-ipmi
 
 ## IPMI
 
