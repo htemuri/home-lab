@@ -3,12 +3,13 @@
 ## Goals with Lab
 
 ### Networking
-1. Routing through OPNSense
+1. Routing through ~~OPNSense~~ Microtik RouterOS
 2. DNS Server through PiHole
 3. VLANs for guest network, security system/cameras, IOT devices, public-facing services
 4. Load Balancer and Reverse Proxy for public facing services
 
 ### Virtualization
+0. XCP-ng hypervisor - configured through terraform
 1. Kubernetes Clusters for container services
 2. Plex server instance
 3. Development environments (Different Linux distros)
@@ -19,8 +20,8 @@
 2. Prometheus monitoring and Grafana Dashboarding
 
 ### Storage
-1. TrueNAS with ZFS using SSDs
-2. Enable NFS for linux virtual machines, Samba for Windows instances
+- [x] TrueNAS with ZFS using SSDs
+- [x] Enable NFS for linux virtual machines, Samba for Windows instances
 
 ## Hardware List
 
