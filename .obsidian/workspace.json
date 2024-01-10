@@ -158,8 +158,11 @@
   },
   "active": "4bc3c901946d8a69",
   "lastOpenFiles": [
-    "sd.md",
+    "README.md",
     "docs/Networking Config.md",
+    "src/packer/docker-ubuntu.pkr.hcl",
+    "src/packer",
+    "sd.md",
     "docs/Excalidraw/sd.md",
     "docs/Excalidraw"
   ]

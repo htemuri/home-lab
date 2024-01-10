@@ -1,0 +1,6 @@
+# R730 top one
+lambda_01:
+  hosts:
+    pihole:
+      ansible_host: 192.168.10.100
+      ansible_port: 22

@@ -9,12 +9,13 @@
 | Virtual Appliances | 192.168.100.0/20 | 192.168.100.0-192.168.115.255 | 4,096               | VMs, Container, and others           |
 | VPN                | 192.168.200.0/28 | 192.168.200.0-192.168.200.15  | 16                  | VPN Tunnel space for Wireguard users |
 ### Key Appliances:
-| **Name**       | **Subnet**    | **IP Address** | **FQDN**   | **Port** | **Protocol** |
-| -------------- | --- | -------------- | ---------- | -------- | ------------ |
-| LAN (RouterOS) | DHCP    | 192.168.0.0    | router.lab | 80       | TCP          |
-| R730_01        | Secure    | 192.168.10.1   |            | 80       | TCP          |
-| R730XD         | Secure    | 192.168.10.2   |            | 80       | TCP          |
-| R730_02        | Secure    | 192.168.10.3   |            | 80       | TCP          |
-| NFS            | Virtual Appliances    | 192.168.100.0  |            | 80       | TCP          |
-| XCP_01         | Secure    | 192.168.10.10  |            | 80       | TCP          |
-| XCP_02         | Secure    | 192.168.10.11  |            | 80       | TCP          |
+| **Name** | **Subnet** | **IP Address** | **FQDN** | **Port** | **Protocol** |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| LAN (RouterOS) | DHCP | 192.168.0.0 | gateway.lab | 80 | TCP |
+| DNS | Secure | 192.168.10.100 | dns.lab | 53 | TCP |
+| R730_01 | Secure | 192.168.10.1 | nimbus.lab | 80 | TCP |
+| R730XD | Secure | 192.168.10.2 | memnous.lab | 80 | TCP |
+| R730_02 | Secure | 192.168.10.3 | aurora.lab | 80 | TCP |
+| NFS | Virtual Appliances | 192.168.100.0 | archive.lab | 80 | TCP |
+| Proxmox_01 | Secure | 192.168.10.10 | olympus.lab | 8006 | TCP |
+| Proxmox_02 | Secure | 192.168.10.11 | aether.lab | 8006 | TCP |
