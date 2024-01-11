@@ -11,7 +11,7 @@
 ### Key Appliances:
 | **Name** | **Subnet** | **IP Address** | **FQDN** | **Port** | **Protocol** |
 | ---- | ---- | ---- | ---- | ---- | ---- |
-| LAN (RouterOS) | DHCP | 192.168.0.0 | gateway.lab | 80 | TCP |
+| LAN (RouterOS) | DHCP | 192.168.0.1 | gateway.lab | 80 | TCP |
 | DNS | Secure | 192.168.10.100 | dns.lab | 53 | TCP |
 | R730_01 | Secure | 192.168.10.1 | nimbus.lab | 80 | TCP |
 | R730XD | Secure | 192.168.10.2 | memnous.lab | 80 | TCP |
