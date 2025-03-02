@@ -25,5 +25,5 @@
 
 | **Hostname**      | **IP address** | **Use**                |
 |-------------------|----------------|------------------------|
-| k8s-01-control-01 | 192.168.96.01  | Control Node           |
-| k8s-01-pool-01-01 | 192.168.96.02  | Node Pool 1 - Worker 1 |
+| k8s-01-control-01 | 192.168.96.01  | Cluster 1 - Control Node 1           |
+| k8s-01-pool-01-01 | 192.168.96.02  | Cluster 1 - Node Pool 1 - Worker 1 |
