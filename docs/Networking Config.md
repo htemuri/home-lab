@@ -19,3 +19,11 @@
 | NFS | Virtual Appliances | 192.168.100.0 | archive.lab | 80 | TCP |
 | Proxmox_01 | Secure | 192.168.10.10 | olympus.lab | 8006 | TCP |
 | Proxmox_02 | Secure | 192.168.10.11 | aether.lab | 8006 | TCP |
+
+
+### K8s Cluster 01
+
+| **Hostname**      | **IP address** | **Use**                |
+|-------------------|----------------|------------------------|
+| k8s-01-control-01 | 192.168.96.01  | Control Node           |
+| k8s-01-pool-01-01 | 192.168.96.02  | Node Pool 1 - Worker 1 |
