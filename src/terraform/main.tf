@@ -1,24 +1,3 @@
-terraform {
-  required_providers {
-    proxmox = {
-      source = "bpg/proxmox"
-    }
-  }
-}
-
-provider "proxmox" {
-  endpoint  = "https://192.168.10.10:8006/"
-  api_token = var.pve_api_token
-  insecure  = true
-
-  ssh {
-    agent       = true
-    username    = "root"
-    root_ticket = true
-    password    = var.pve_ssh_password
-  }
-}
-
 resource "proxmox_virtual_environment_vm" "talos_template" {
   name      = "talos-template"
   node_name = var.node_name
