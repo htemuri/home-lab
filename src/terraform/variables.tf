@@ -1,11 +1,11 @@
-variable "node_name" {
-  type        = string
-  description = "Name of PVE node"
-}
-
-variable "datastore_id" {
-  type        = string
-  description = "ID of PVE storage object"
+variable "templates" {
+  description = "VM Templates to create"
+  type = map(object({
+    cpu_cores    = number
+    memory_mb    = number
+    iso_path     = string
+    disk_size_gb = number
+  }))
 }
 
 

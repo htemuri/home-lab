@@ -1,48 +1,12 @@
-resource "proxmox_virtual_environment_vm" "talos_template" {
-  name      = "talos-template"
-  node_name = var.node_name
+module "template" {
+  source   = "./modules/template"
+  for_each = var.templates
 
-  template = true
-  started  = false
-
-  machine     = "q35"
-  bios        = "ovmf"
-  description = "Managed by Terraform"
-
-  cpu {
-    cores = 2
-  }
-
-  memory {
-    dedicated = 2048
-  }
-
-  efi_disk {
-    datastore_id = var.datastore_id
-    type         = "4m"
-  }
-
-  disk {
-    datastore_id = var.datastore_id
-    file_id      = "nfs-iso:iso/metal-amd64.iso"
-    interface    = "virtio0"
-    iothread     = true
-    discard      = "on"
-    size         = 20
-  }
-
-  initialization {
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-      }
-    }
-
-    #user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
-  }
-
-  network_device {
-    bridge = "vmbr0"
-  }
-
+  template_name           = each.key
+  pve_node_name           = "pve"
+  local_disk_datastore_id = "local-lvm"
+  cpu_cores               = each.value.cpu_cores
+  memory_mb               = each.value.memory_mb
+  iso_path                = each.value.iso_path
+  disk_size_gb            = each.value.disk_size_gb
 }
