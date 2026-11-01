@@ -1,3 +1,4 @@
+
 variable "vm_name" {
   type        = string
   description = "Name of VM"
@@ -20,7 +21,7 @@ variable "cpu_cores" {
   description = "Number of VM CPU cores"
 }
 
-variable "memory_mb" {
+variable "memory_gb" {
   type        = number
   default     = null
   description = "Memory to assign to VM in MB"

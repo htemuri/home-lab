@@ -7,36 +7,53 @@ terraform {
 }
 
 resource "proxmox_virtual_environment_vm" "this" {
-  name      = var.template_name
-  node_name = var.pve_node_name
+  name        = var.template_name
+  description = var.description
+  node_name   = var.pve_node_name
+  tags        = concat(["terraform", "template"], var.tags)
 
-  template = true
-  started  = false
+  machine         = var.machine
+  bios            = var.bios
+  template        = true
+  started         = false
+  stop_on_destroy = true
+  scsi_hardware   = var.scsi_hardware
 
-  machine     = "q35"
-  bios        = "ovmf"
-  description = "Managed by Terraform"
+  agent {
+    enabled = true
+    trim    = true
+  }
+
+  vga {
+    type = "qxl"
+  }
 
   cpu {
+    type  = "host"
     cores = var.cpu_cores
   }
 
   memory {
-    dedicated = var.memory_mb
+    dedicated = 1024 * var.memory_gb
   }
 
   efi_disk {
     datastore_id = var.local_disk_datastore_id
+    file_format  = "raw"
     type         = "4m"
   }
 
   disk {
     datastore_id = var.local_disk_datastore_id
     file_id      = var.iso_path
-    interface    = "virtio0"
+    interface    = "scsi0"
     iothread     = true
+    ssd          = true
+    file_format  = "raw"
     discard      = "on"
     size         = var.disk_size_gb
+
+    cache = var.disk_cache
   }
 
   initialization {
@@ -45,11 +62,13 @@ resource "proxmox_virtual_environment_vm" "this" {
         address = "dhcp"
       }
     }
+  }
 
+  operating_system {
+    type = "l26"
   }
 
   network_device {
     bridge = "vmbr0"
   }
-
 }

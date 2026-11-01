@@ -11,28 +11,39 @@ variable "isos" {
 variable "templates" {
   description = "VM Templates to create"
   type = map(object({
-    cpu_cores    = number
-    memory_mb    = number
-    iso_name     = string
-    disk_size_gb = number
+    description = string
+    tags        = optional(list(string))
+
+    machine       = optional(string, "q35")
+    bios          = optional(string, "ovmf")
+    scsi_hardware = optional(string, "virtio-scsi-pci")
+
+    cpu_cores = number
+    memory_gb = number
+    iso_name  = string
+
+    local_disk_datastore_id = optional(string, "local-lvm")
+    disk_cache              = optional(string)
+    disk_size_gb            = optional(number, 20)
   }))
 }
 
 variable "vms" {
   description = "VMs to create"
   type = map(object({
+    count         = optional(number, 1)
     template_name = string
     cpu_cores     = optional(number)
-    memory_mb     = optional(number)
+    memory_gb     = optional(number)
     additional_disks = optional(map(object({
       datastore_id = string
       interface    = string
       size_in_gb   = number
     })), {})
 
-    dns_servers  = optional(list(string), [])
-    ipv4_addr    = string
-    gateway_addr = optional(string, "192.168.0.1")
+    dns_servers      = optional(list(string), [])
+    dedicated_subnet = string
+    gateway_addr     = optional(string, "192.168.0.1")
 
     enable_qemu_agent = optional(bool, false)
   }))

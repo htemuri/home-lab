@@ -23,7 +23,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   #  }
   #
   #  memory {
-  #    dedicated = var.memory_mb
+  #    dedicated = var.memory_gb
   #  }
 
   dynamic "disk" {
@@ -47,11 +47,5 @@ resource "proxmox_virtual_environment_vm" "this" {
         gateway = var.gateway_addr
       }
     }
-
   }
-
-  network_device {
-    bridge = "vmbr0"
-  }
-
 }
