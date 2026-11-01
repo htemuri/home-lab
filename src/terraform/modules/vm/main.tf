@@ -18,13 +18,13 @@ resource "proxmox_virtual_environment_vm" "this" {
     enabled = var.enable_qemu_agent
   }
 
-  cpu {
-    cores = var.cpu_cores
-  }
-
-  memory {
-    dedicated = var.memory_mb
-  }
+  #  cpu {
+  #    cores = var.cpu_cores
+  #  }
+  #
+  #  memory {
+  #    dedicated = var.memory_mb
+  #  }
 
   dynamic "disk" {
     for_each = var.additional_disks

@@ -1,9 +1,19 @@
+variable "isos" {
+  description = "ISO downloads for VMs"
+  type = map(object({
+    datastore_id  = optional(string, "nfs-iso")
+    download_url  = string
+    checksum      = optional(string)
+    checksum_algo = optional(string)
+  }))
+}
+
 variable "templates" {
   description = "VM Templates to create"
   type = map(object({
     cpu_cores    = number
     memory_mb    = number
-    iso_path     = string
+    iso_name     = string
     disk_size_gb = number
   }))
 }
@@ -27,3 +37,5 @@ variable "vms" {
     enable_qemu_agent = optional(bool, false)
   }))
 }
+
+
