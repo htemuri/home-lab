@@ -46,7 +46,7 @@ resource "proxmox_download_file" "this" {
 resource "proxmox_virtual_environment_vm" "controller" {
   depends_on  = [proxmox_download_file.this]
   count       = var.controller_count
-  name        = "${var.cluster_name}-controller-${format("%02s", count.index)}"
+  name        = "${var.cluster_name}-controller-${format("%02s", count.index + 1)}"
   description = var.cluster_description
   node_name   = var.pve_node_name
   tags        = concat(["terraform", "talos-controller"], var.tags)
@@ -109,7 +109,7 @@ resource "proxmox_virtual_environment_vm" "controller" {
     }
     ip_config {
       ipv4 {
-        address = "${cidrhost(var.controller_subnet, count.index)}/16"
+        address = "${cidrhost(var.controller_subnet, count.index + 1)}/16"
         gateway = var.default_gateway
       }
     }
@@ -127,7 +127,7 @@ resource "proxmox_virtual_environment_vm" "controller" {
 # worker vm
 resource "proxmox_virtual_environment_vm" "worker" {
   count       = var.worker_count
-  name        = "${var.cluster_name}-worker-${format("%02s", count.index)}"
+  name        = "${var.cluster_name}-worker-${format("%02s", count.index + 1)}"
   description = var.cluster_description
   node_name   = var.pve_node_name
   tags        = concat(["terraform", "talos-worker"], var.tags)
@@ -189,7 +189,7 @@ resource "proxmox_virtual_environment_vm" "worker" {
     }
     ip_config {
       ipv4 {
-        address = "${cidrhost(var.worker_subnet, count.index)}/16"
+        address = "${cidrhost(var.worker_subnet, count.index + 1)}/16"
         gateway = var.default_gateway
       }
     }
