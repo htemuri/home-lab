@@ -7,6 +7,7 @@ module "talos-cluster" {
   pve_node_name                   = each.value.pve_node_name
   tags                            = each.value.tags
   talos_version                   = each.value.talos_version
+  additional_talos_os_extensions  = each.value.additional_talos_os_extensions
   local_disk_datastore_id         = each.value.local_disk_datastore_id
   controller_count                = each.value.controller_count
   default_controller_cpu_cores    = each.value.controller_cpu_cores

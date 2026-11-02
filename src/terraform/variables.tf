@@ -11,15 +11,16 @@
 variable "clusters" {
   description = "Talos clusters to create"
   type = map(object({
-    description             = optional(string)
-    pve_node_name           = optional(string, "pve")
-    tags                    = optional(list(string))
-    talos_version           = optional(string, "v1.14.5")
-    local_disk_datastore_id = optional(string, "local-lvm")
-    controller_count        = optional(number, 1)
-    controller_cpu_cores    = optional(number, 2)
-    controller_memory_gb    = optional(number, 4)
-    controller_disk_gb      = optional(number, 20)
+    description                    = optional(string)
+    pve_node_name                  = optional(string, "pve")
+    tags                           = optional(list(string))
+    talos_version                  = optional(string, "v1.14.5")
+    additional_talos_os_extensions = optional(list(string), [])
+    local_disk_datastore_id        = optional(string, "local-lvm")
+    controller_count               = optional(number, 1)
+    controller_cpu_cores           = optional(number, 2)
+    controller_memory_gb           = optional(number, 4)
+    controller_disk_gb             = optional(number, 20)
     controller_additional_disks = optional(map(object({
       datastore_id = string
       interface    = string

@@ -14,10 +14,10 @@ data "talos_image_factory_extensions_versions" "this" {
   # get the latest talos version
   talos_version = var.talos_version
   filters = {
-    names = [
+    names = concat([
       "intel-ucode",
       "qemu-guest-agent",
-    ]
+    ], var.additional_talos_os_extensions)
   }
 }
 

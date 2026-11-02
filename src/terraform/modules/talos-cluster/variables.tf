@@ -26,6 +26,12 @@ variable "talos_version" {
   default     = "v1.14.5"
 }
 
+variable "additional_talos_os_extensions" {
+  type        = list(string)
+  description = "Additional talos factory extensions to add to OS image"
+  default     = []
+}
+
 variable "iso_datastore_id" {
   type        = string
   description = "Path to VM image ISO datastore (ex: nfs-iso)"
