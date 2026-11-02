@@ -1,6 +1,6 @@
 isos = {
   "talos-os-v1_14_5.iso" = {
-    download_url = "https://factory.talos.dev/image/e3fab82b561b5e559cdf1c0b1e5950c0e52700b9208a2cfaa5b18454796f3a7e/v1.14.5/metal-amd64.iso"
+    download_url = "https://factory.talos.dev/image/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515/v1.14.5/nocloud-amd64.iso"
   }
 }
 

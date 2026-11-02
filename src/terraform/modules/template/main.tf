@@ -47,7 +47,6 @@ resource "proxmox_virtual_environment_vm" "this" {
     datastore_id = var.local_disk_datastore_id
     file_id      = var.iso_path
     interface    = "scsi0"
-    iothread     = true
     ssd          = true
     file_format  = "raw"
     discard      = "on"
@@ -59,6 +58,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   initialization {
     ip_config {
       ipv4 {
+
         address = "dhcp"
       }
     }
