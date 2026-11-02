@@ -38,6 +38,7 @@ module "vm" {
 
   vm_name           = each.key
   template_id       = module.template[each.value.config.template_name].id
+  tags              = each.value.config.tags
   cpu_cores         = each.value.config.cpu_cores
   memory_gb         = each.value.config.memory_gb
   additional_disks  = each.value.config.additional_disks

@@ -9,6 +9,7 @@ terraform {
 resource "proxmox_virtual_environment_vm" "this" {
   name      = var.vm_name
   node_name = var.pve_node_name
+  tags      = concat(["terraform", "vm"], var.tags)
 
   clone {
     vm_id = var.template_id

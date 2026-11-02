@@ -1,4 +1,3 @@
-
 variable "vm_name" {
   type        = string
   description = "Name of VM"
@@ -8,6 +7,12 @@ variable "pve_node_name" {
   type        = string
   default     = "pve"
   description = "Name of PVE node"
+}
+
+variable "tags" {
+  type        = list(string)
+  description = "VM tags"
+  default     = null
 }
 
 variable "template_id" {

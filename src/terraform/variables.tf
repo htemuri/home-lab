@@ -32,6 +32,7 @@ variable "vms" {
   description = "VMs to create"
   type = map(object({
     count         = optional(number, 1)
+    tags          = optional(list(string), [])
     template_name = string
     cpu_cores     = optional(number)
     memory_gb     = optional(number)

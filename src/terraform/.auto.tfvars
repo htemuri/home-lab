@@ -27,12 +27,14 @@ templates = {
 vms = {
   "olympus-controller" = {
     count            = 2
+    tags             = ["olympus"]
     template_name    = "talos-controller"
     dedicated_subnet = "192.168.96.0/29"
   }
 
   "olympus-worker" = {
     count            = 2
+    tags             = ["olympus"]
     template_name    = "talos-worker"
     dedicated_subnet = "192.168.96.16/28"
   }
