@@ -203,3 +203,71 @@ resource "proxmox_virtual_environment_vm" "worker" {
     bridge = "vmbr0"
   }
 }
+
+resource "talos_machine_secrets" "this" {}
+
+#output "controller0_node_ip" {
+#  value = proxmox_virtual_environment_vm.controller[0].ipv4_addresses
+#}
+
+data "talos_machine_configuration" "this" {
+  cluster_name       = var.cluster_name
+  machine_type       = "controlplane"
+  cluster_endpoint   = "https://${cidrhost(var.controller_subnet, 1)}:6443"
+  machine_secrets    = talos_machine_secrets.this.machine_secrets
+  kubernetes_version = "v1.32.0"
+}
+
+# resource "talos_machine_configuration_apply" "this" {
+#   client_configuration        = talos_machine_secrets.this.client_configuration
+#   machine_configuration_input = data.talos_machine_configuration.this.machine_configuration
+#   node                        = cidrhost(var.controller_subnet, 1)
+#   config_patches = [
+#     yamlencode({
+#       machine = {
+#         install = {
+#           disk = "/dev/sda"
+#         }
+#       }
+#     })
+#   ]
+# }
+
+
+resource "talos_machine_configuration_apply" "this" {
+  client_configuration        = talos_machine_secrets.this.client_configuration
+  machine_configuration_input = data.talos_machine_configuration.this.machine_configuration
+  node                        = cidrhost(var.controller_subnet, 1)
+
+  config_patches = [
+    yamlencode({
+      apiVersion = "v1alpha1"
+      kind       = "UnattendedInstallConfig"
+
+      provisioning = {
+        diskSelector = {
+          match = "disk.dev_path == \"/dev/sda\""
+        }
+      }
+    })
+  ]
+}
+
+#resource "talos_cluster" "this" {
+#  depends_on           = [talos_machine_configuration_apply.this]
+#  node                 = cidrhost(var.controller_subnet, 1)
+#  client_configuration = talos_machine_secrets.this.client_configuration
+#  kubernetes_version   = "v1.32.0"
+#}
+resource "talos_machine_bootstrap" "this" {
+  depends_on = [
+    talos_machine_configuration_apply.this
+  ]
+  node                 = "10.5.0.2"
+  client_configuration = talos_machine_secrets.this.client_configuration
+}
+resource "talos_cluster_kubeconfig" "this" {
+  client_configuration = talos_machine_secrets.this.client_configuration
+  node                 = cidrhost(var.controller_subnet, 1)
+  depends_on           = [talos_machine_bootstrap.this]
+}
