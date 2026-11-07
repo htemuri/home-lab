@@ -48,4 +48,14 @@ clusters = {
     controller_subnet = "192.168.96.0/29"
     worker_subnet     = "192.168.96.16/28"
   }
+
+  "persius" = {
+    description       = "test large cluster"
+    tags              = ["test"]
+    talos_version     = "v1.14.5"
+    controller_count  = 3
+    worker_count      = 3
+    controller_subnet = "192.168.97.0/29"
+    worker_subnet     = "192.168.97.16/28"
+  }
 }

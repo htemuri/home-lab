@@ -26,6 +26,12 @@ variable "talos_version" {
   default     = "v1.14.5"
 }
 
+variable "kubernetes_version" {
+  type        = string
+  description = "Which version of kubernetes for each node"
+  default     = "v1.32.0"
+}
+
 variable "additional_talos_os_extensions" {
   type        = list(string)
   description = "Additional talos factory extensions to add to OS image"
