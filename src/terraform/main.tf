@@ -22,6 +22,10 @@ module "talos-cluster" {
   worker_additional_disks         = each.value.worker_additional_disks
   worker_subnet                   = each.value.worker_subnet
   default_gateway                 = "192.168.0.1"
+
+  flux_repo_url    = each.value.flux_repo_url
+  flux_repo_branch = each.value.flux_repo_branch
+  flux_path        = coalesce(each.value.flux_path, "/clusters/${each.key}")
 }
 
 # module "iso" {

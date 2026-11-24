@@ -29,7 +29,7 @@ variable "talos_version" {
 variable "kubernetes_version" {
   type        = string
   description = "Which version of kubernetes for each node"
-  default     = "v1.32.0"
+  default     = "v1.37.0"
 }
 
 variable "additional_talos_os_extensions" {
@@ -126,4 +126,18 @@ variable "worker_additional_disks" {
 variable "worker_subnet" {
   type        = string
   description = "Subnet to assign worker vm static IPs within"
+}
+
+variable "flux_repo_url" {
+  type = string
+}
+
+variable "flux_repo_branch" {
+  type    = string
+  default = "main"
+}
+
+variable "flux_path" {
+  type    = string
+  default = "./cluster"
 }

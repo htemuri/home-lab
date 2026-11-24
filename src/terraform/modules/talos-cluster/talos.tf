@@ -31,7 +31,27 @@ data "talos_machine_configuration" "controller" {
   machine_secrets    = talos_machine_secrets.this.machine_secrets
   talos_version      = var.talos_version
   kubernetes_version = var.kubernetes_version
-  config_patches     = [local.machine_install]
+  config_patches = [
+    local.machine_install,
+    yamlencode({
+      cluster = {
+        extraManifests = [
+          "https://github.com/fluxcd/flux2/releases/latest/download/install.yaml"
+        ]
+        inlineManifests = [
+          {
+            name     = "cilium"
+            contents = file("${path.module}/cilium.yaml")
+          },
+          {
+            name     = "flux-sync"
+            contents = local.flux_sync_manifest
+          }
+        ]
+      }
+    })
+  ]
+
 }
 
 data "talos_machine_configuration" "worker" {

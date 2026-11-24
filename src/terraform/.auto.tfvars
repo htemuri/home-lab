@@ -47,5 +47,7 @@ clusters = {
     talos_version     = "v1.14.5"
     controller_subnet = "192.168.96.0/29"
     worker_subnet     = "192.168.96.16/28"
+    controller_count  = 2
+    worker_count      = 3
   }
 }

@@ -37,6 +37,10 @@ variable "clusters" {
       size_in_gb   = number
     })), {})
     worker_subnet = string
+
+    flux_repo_url    = optional(string, "https://github.com/htemuri/home-lab")
+    flux_repo_branch = optional(string, "main")
+    flux_path        = optional(string, null)
   }))
 }
 

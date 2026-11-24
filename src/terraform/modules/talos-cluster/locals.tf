@@ -14,4 +14,38 @@ locals {
       }
     }
   })
+  flux_sync_manifest = join("\n---\n", [
+    yamlencode({
+      apiVersion = "source.toolkit.fluxcd.io/v1"
+      kind       = "GitRepository"
+      metadata = {
+        name      = "flux-system"
+        namespace = "flux-system"
+      }
+      spec = {
+        interval = "1m"
+        url      = var.flux_repo_url
+        ref = {
+          branch = var.flux_repo_branch
+        }
+      }
+    }),
+    yamlencode({
+      apiVersion = "kustomize.toolkit.fluxcd.io/v1"
+      kind       = "Kustomization"
+      metadata = {
+        name      = "flux-system"
+        namespace = "flux-system"
+      }
+      spec = {
+        interval = "10m"
+        path     = var.flux_path
+        prune    = true
+        sourceRef = {
+          kind = "GitRepository"
+          name = "flux-system"
+        }
+      }
+    })
+  ])
 }
