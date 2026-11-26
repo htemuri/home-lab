@@ -45,6 +45,12 @@ locals {
           kind = "GitRepository"
           name = "flux-system"
         }
+        decryption = {
+          provider = "sops"
+          secretRef = {
+            name = "sops-age"
+          }
+        }
       }
     })
   ])

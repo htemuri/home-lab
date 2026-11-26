@@ -1,0 +1,38 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: truenas-csi
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://raw.githubusercontent.com/truenas/truenas-csi/master/charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: truenas-csi
+  namespace: truenas-csi
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: truenas-csi
+      version: "*"
+      sourceRef:
+        kind: HelmRepository
+        name: truenas-csi
+        namespace: flux-system
+      interval: 1h
+  values:
+    truenas:
+      url: "wss://192.168.100.0"
+      defaultPool: "fastnas"
+      existingSecret: truenas-api
+      existingSecretKey: api-key
+      insecureSkipTLS: true
+
+    storageClasses:
+      - name: truenas-nfs
+        parameters:
+          protocol: nfs
+          datasetPath: "proxmox/vm-volumes"
